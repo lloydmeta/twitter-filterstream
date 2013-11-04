@@ -1,10 +1,10 @@
 package com.beachape.twitter
 
 import twitter4j.conf.{Configuration, ConfigurationBuilder}
-import com.typesafe.config.ConfigFactory
 
 /**
  * Object that returns a Twitter4J configuration
+ * Encapsulates underlying Java implementation
  */
 object TwitterConfig {
 

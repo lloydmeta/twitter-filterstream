@@ -12,4 +12,6 @@ import twitter4j.Status
 package object twitter {
 
   sealed case class NewTweet(status: Status)
+
+  type Callback = Status => Unit
 }

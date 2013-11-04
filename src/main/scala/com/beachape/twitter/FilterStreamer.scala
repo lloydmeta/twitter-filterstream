@@ -3,17 +3,20 @@ package com.beachape.twitter
 import twitter4j.{TwitterStreamFactory, StatusListener, FilterQuery}
 import twitter4j.conf.Configuration
 
+/**
+ * Companion object for instantiating FilterStreamer via apply
+ */
 object FilterStreamer {
-  def apply(terms: List[String], listener: StatusListener)(implicit twitterConfig: Configuration): FilterStreamer =
-    new FilterStreamer(twitterConfig, listener, new FilterQuery().track(terms.toArray))
+  def apply(terms: List[String], listener: StatusListener, twitterConfig: Configuration): FilterStreamer =
+    new FilterStreamer(new FilterQuery().track(terms.toArray), listener, twitterConfig)
 }
 
 class FilterStreamer(
-                val config: Configuration,
-                val listener: StatusListener,
-                val filter: FilterQuery) {
+                      val filter: FilterQuery,
+                      val listener: StatusListener,
+                      val config: Configuration) {
 
-  lazy val twitterStream = new TwitterStreamFactory(config).getInstance
+  val twitterStream = new TwitterStreamFactory(config).getInstance
 
   def start() {
     twitterStream.addListener(listener)

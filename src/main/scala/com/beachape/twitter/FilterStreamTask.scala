@@ -1,19 +1,28 @@
 package com.beachape.twitter
 
-import akka.actor.ActorRef
 import twitter4j.conf.Configuration
+import twitter4j.StatusListener
 
 object FilterStreamTask {
-  def apply(actor: ActorRef, terms: List[String])(implicit config: Configuration) = new FilterStreamTask(actor, terms, config)
+  def apply(
+             listener: StatusListener,
+             terms: List[String],
+             config: Configuration) = new FilterStreamTask(listener, terms, config)
 }
 
-class FilterStreamTask(actor: ActorRef, terms: List[String], config: Configuration) extends Runnable {
+class FilterStreamTask(
+                        listener: StatusListener,
+                        terms: List[String],
+                        twitterConfig: Configuration) extends Runnable {
 
-  lazy val filterStreamer = FilterStreamer(terms, Listener(actor ! NewTweet(_)))(config)
+  val filterStreamer = FilterStreamer(terms, listener, twitterConfig)
 
   def run() {
     try {
       filterStreamer.start()
+      while (!Thread.currentThread().isInterrupted) {
+        Thread.sleep(1) // Just wait
+      }
     } catch {
       case e: InterruptedException =>
     } finally {
