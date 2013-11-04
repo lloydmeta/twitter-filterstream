@@ -1,4 +1,4 @@
-package com.beachape.twitter
+package com.beachape.twitterFilterStream
 
 import akka.actor.{Actor, Props}
 import twitter4j.conf.Configuration

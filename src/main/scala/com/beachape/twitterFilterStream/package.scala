@@ -9,7 +9,7 @@ import twitter4j.Status
  * Time: 20:48
  * To change this template use File | Settings | File Templates.
  */
-package object twitter {
+package object twitterFilterStream {
 
   sealed case class NewTweet(status: Status)
 

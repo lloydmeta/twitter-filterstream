@@ -1,4 +1,4 @@
-package com.beachape.twitter
+package com.beachape.twitterFilterStream
 
 import twitter4j.conf.Configuration
 import twitter4j.StatusListener
