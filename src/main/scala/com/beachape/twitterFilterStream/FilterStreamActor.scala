@@ -35,6 +35,8 @@ object FilterStreamActor {
 class FilterStreamActor(termsToWatch: List[String],
                         clientConfig: Configuration,
                         callback: Callback) extends Actor with akka.actor.ActorLogging {
+  import context._
+
   private val zelf = self
   private val filterStreamTask = FilterStreamTask(Listener(zelf ! NewTweet(_)), termsToWatch, clientConfig)
   private val filterStreamThread = new Thread(filterStreamTask, "streamTask")
@@ -54,6 +56,19 @@ class FilterStreamActor(termsToWatch: List[String],
     case message: NewTweet => {
       callback(message.status)
       log.info(message.status.getText)
+    }
+    case cb: Callback => {
+      become(receiveWithNewCallback(cb))
+    }
+  }
+
+  def receiveWithNewCallback(cb: Callback): Receive = {
+    case message: NewTweet => {
+      cb(message.status)
+      log.info(message.status.getText)
+    }
+    case cb: Callback => {
+      become(receiveWithNewCallback(cb))
     }
   }
 
