@@ -7,7 +7,7 @@ import twitter4j.{StallWarning, StatusListener, Status, StatusDeletionNotice}
  */
 object SimpleListener {
   /**
-   * Instantiates a Listener
+   * Instantiates a StatusListener with just a callback function
    * @param func Status => Unit
    * @return StatusListener
    */
