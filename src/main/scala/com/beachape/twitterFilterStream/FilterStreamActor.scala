@@ -38,7 +38,7 @@ class FilterStreamActor(termsToWatch: List[String],
   import context._
 
   private val zelf = self
-  private val filterStreamTask = FilterStreamTask(Listener(zelf ! NewTweet(_)), termsToWatch, clientConfig)
+  private val filterStreamTask = FilterStreamTask(SimpleListener(zelf ! NewTweet(_)), termsToWatch, clientConfig)
   private val filterStreamThread = new Thread(filterStreamTask, "streamTask")
 
   override def preStart() = {
