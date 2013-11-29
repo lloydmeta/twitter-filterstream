@@ -8,7 +8,10 @@ resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/release
 
 libraryDependencies ++= Seq(
   "org.twitter4j" % "twitter4j-stream" % "3.0.3",
-  "com.typesafe.akka" %% "akka-actor" % "2.2.1"
+  "com.typesafe.akka" %% "akka-actor" % "2.2.1",
+  "com.typesafe.akka" %% "akka-testkit" % "2.2.1" % "test",
+  "org.scalatest" %% "scalatest" % "2.0" % "test",
+   "org.mockito" % "mockito-core" % "1.9.5" % "test"
 )
 
 publishTo <<= version { v: String =>
