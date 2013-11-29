@@ -1,4 +1,4 @@
-twitter-filterstream
+twitter-filterstream [![Build Status](https://travis-ci.org/lloydmeta/twitter-filterstream.png?branch=master)](https://travis-ci.org/lloydmeta/twitter-filterstream)
 ==================
 
 Very simple and thin wrapper around Twitter4J's Stream API functionality.
