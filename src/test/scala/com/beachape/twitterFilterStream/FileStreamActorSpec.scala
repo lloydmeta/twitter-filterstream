@@ -40,7 +40,7 @@ with MockitoSugar{
     it("should invoke the new callback when receiving a NewTweet") {
       new Fixtures {
         val newP = Promise[Int]()
-        actor ! { x: Callback => newP.success(1337) }
+        actor ! { x: Status => newP.success(1337) }
         actor ! NewTweet(mockStatus)
         newP.future map (_ should be(1337))
       }
